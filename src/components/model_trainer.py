@@ -47,43 +47,42 @@ class ModelTrainer:
                     "AdaBoost Regressor": AdaBoostRegressor(),
                 }
 
-            params={
-                    "Decision Tree": {
-                        'criterion':['squared_error', 'friedman_mse', 'absolute_error', 'poisson'],
-                        'splitter':['best','random'],
-                        'max_features':['sqrt','log2'],
+            params = {
+                    'Decision Tree': {
+                        'criterion': ['squared_error', 'friedman_mse', 'absolute_error', 'poisson'],
+                        'splitter': ['best', 'random'],
+                        'max_features': ['sqrt', 'log2'],
                     },
-                    "Random Forest":{
-                        'criterion':['squared_error', 'friedman_mse', 'absolute_error', 'poisson'],
-                    
-                        'max_features':['sqrt','log2',None],
-                        'n_estimators': [8,16,32,64,128,256]
+                    'Random Forest': {
+                        'criterion': ['squared_error', 'friedman_mse', 'absolute_error', 'poisson'],
+                        'max_features': ['sqrt', 'log2', None],
+                        'n_estimators': [8, 16, 32, 64, 128, 256]
                     },
-                    "Gradient Boosting":{
-                        'loss':['squared_error', 'huber', 'absolute_error', 'quantile'],
-                        'learning_rate':[.1,.01,.05,.001],
-                        'subsample':[0.6,0.7,0.75,0.8,0.85,0.9],
-                        'criterion':['squared_error', 'friedman_mse'],
-                        'max_features':[None, 'sqrt', 'log2'],
-                        'n_estimators': [8,16,32,64,128,256]
+                    'Gradient Boosting': {
+                        'loss': ['squared_error', 'huber', 'absolute_error', 'quantile'],
+                        'learning_rate': [.1, .01, .05, .001],
+                        'subsample': [0.6, 0.7, 0.75, 0.8, 0.85, 0.9],
+                        'criterion': ['squared_error', 'friedman_mse'],
+                        'max_features': [None, 'sqrt', 'log2'],
+                        'n_estimators': [8, 16, 32, 64, 128, 256]
                     },
-                    "Linear Regression":{},
-                    "XGBRegressor":{
-                        'learning_rate':[.1,.01,.05,.001, 0.005],
-                        'n_estimators': [8,16,32,64,128,256]
+                    'Linear Regression': {},
+                    'XGBRegressor': {
+                        'learning_rate': [.1, .01, .05, .001, 0.005],
+                        'n_estimators': [8, 16, 32, 64, 128, 256]
                     },
-                    "CatBoosting Regressor":{
+                    'CatBoosting Regressor': {
                         'depth': [6, 8, 10, 12, 14],
-                        'learning_rate': [.1,.01,.05,.001],,
+                        'learning_rate': [.1, .01, .05, .001],
                         'iterations': [30, 50, 100, 130, 150, 200]
                     },
-                    "AdaBoost Regressor":{
-                        'learning_rate':[.1,.01,.05,.001],,
-                        'loss':['linear','square','exponential'],
-                        'n_estimators': [8,16,32,64,128,256]
+                    'AdaBoost Regressor': {
+                        'learning_rate': [.1, .01, .05, .001],
+                        'loss': ['linear', 'square', 'exponential'],
+                        'n_estimators': [8, 16, 32, 64, 128, 256]
                     }
-                    
                 }
+
 
 
             model_report :dict = evaluate_model(X_train, y_train, X_test, y_test, models, params)
@@ -109,7 +108,7 @@ class ModelTrainer:
             predicted = best_model.predict(X_test)
 
             r2 = r2_score(y_test, predicted)
-            return r2_score
+            return r2
 
             
         except Exception as e:
