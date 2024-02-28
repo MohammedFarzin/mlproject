@@ -1,15 +1,13 @@
 import os
 import sys
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir, os.path.pardir)))
 from src.exception import CustomException
-
 from src.logger import logging
-
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 import os
+from src.components.data_transformation import DataTransformation
+from src.components.model_trainer import ModelTrainer
 
 
 @dataclass
@@ -24,6 +22,9 @@ class DataIngestion:
         self.ingestion_config = DataIngestionConfig()
 
     def initiate_data_ingestion(self):
+        """
+            This function is used for data ingestion
+        """
         logging.info("Entered the data ingestion method")
         try:
             df = pd.read_csv('notebook/data/StudentsPerformance.csv')
@@ -54,4 +55,13 @@ class DataIngestion:
 if  __name__ == "__main__":
     ingestion = DataIngestion()
     train_data, test_data = ingestion.initiate_data_ingestion()
+
+    data_transformation = DataTransformation()
+    train_arr, test_arr, _ = data_transformation.initiate_data_transformation(train_data, test_data)
+
+    model_trainer = ModelTrainer()
+    score = model_trainer.initiate_model_trainer(train_arr, test_arr)
+    print(score)
+
+
 
